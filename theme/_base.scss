@@ -1,0 +1,15 @@
+@forward 'fonts';
+
+body {
+	margin: 0;
+	font-family: 'PT Sans', sans-serif;
+	flex: 1;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
