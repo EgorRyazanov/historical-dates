@@ -1,63 +1,64 @@
 import { FC, useEffect, useState } from 'react';
 
 import { typedMemo } from '../../../../utils/typedMemo';
-import { CirclePoint } from '../../components/CirclePoint/CirclePoint';
-import { Cubic, gsap } from 'gsap';
+import { CirclePoint } from '../../components/CirclePoint';
+import { calculateCirclePointCords } from '../../../../utils/calculateCirclePointOrder';
+import { rotate } from '../../../../utils/animations/rotateAnimation';
+import { DEFAULT_ANIMATION_TIME } from '../../../../utils/consts';
 import styles from './HistoricalDatesPage.module.scss';
 
 interface Info {
 	title: string;
+	id: number;
 }
 
 const data: Info[] = [
-	{ title: 'dads' },
-	{ title: 'dsdsds' },
-	{ title: '1231' },
-	{ title: 'fsf' },
-	{ title: 'rwrw' },
-	{ title: 'dasfaf' },
+	{ title: 'dads', id: 1 },
+	{ title: 'dsdsds', id: 2 },
+	{ title: '1231', id: 3 },
+	{ title: 'fsf', id: 4 },
+	{ title: 'rwrw', id: 5 },
+	{ title: 'dasfaf', id: 6 },
 ];
+
+const deafultSize = { inactive: 6, active: 56 };
 
 const HistoricalDatesPageComponent: FC = () => {
 	// используется useState вместо ref, чтобы предотвратить ошибки с null
 	const [circleElement, setCircleElement] = useState<HTMLDivElement | null>(null);
-	const [currentOrder, setCurrentOrder] = useState<number>(0);
+	const [activeIndex, setActiveIndex] = useState<number>(0);
 
-	const calculatePointCords = (order: number): { x: number; y: number } | null => {
-		if (circleElement != null) {
-			const circleDiameter = circleElement.offsetHeight;
-			const angle = (360 / data.length) * order;
-			const x = Math.round(circleDiameter / 2 + (circleDiameter / 2) * Math.cos((angle * Math.PI) / 180));
-			const y = Math.round(circleDiameter / 2 + (circleDiameter / 2) * Math.sin((angle * Math.PI) / 180));
-			return { x, y };
-		}
-		return null;
-	};
-
-	const rotate = () => {
-		if (circleElement) {
-			const angle = (360 / data.length) * currentOrder;
-			gsap.to(circleElement, {
-				duration: 1,
-				rotation: angle,
-				ease: Cubic.easeInOut,
-			});
-		}
+	const generateClassName = (id: number): string => {
+		return `point-${id}`;
 	};
 
 	useEffect(() => {
-		rotate();
-	}, [currentOrder]);
+		if (circleElement) {
+			const angle = (360 / data.length) * activeIndex;
+			data.map((item) => {
+				rotate(generateClassName(item.id), angle, DEFAULT_ANIMATION_TIME);
+			});
+			rotate(circleElement, -angle, DEFAULT_ANIMATION_TIME);
+		}
+	}, [activeIndex]);
 
 	return (
 		<div className={styles['dates-container']}>
 			<div ref={setCircleElement} className={styles['dates-circle']}>
 				{data.map((item, index) => {
-					const point = calculatePointCords(index + 1);
+					const point = calculateCirclePointCords(index, circleElement, data.length);
 					if (point != null) {
-						// генеририовать key
 						return (
-							<CirclePoint setCurrentOrder={setCurrentOrder} point={point} item={item} key={index} index={index} />
+							<CirclePoint
+								key={item.id}
+								index={index}
+								point={point}
+								title={item.title}
+								size={deafultSize}
+								isActive={activeIndex === index}
+								setActiveIndex={setActiveIndex}
+								controlClassName={generateClassName(item.id)}
+							/>
 						);
 					}
 				})}

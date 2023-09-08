@@ -1,0 +1,2 @@
+export const DEFAULT_ANIMATION_TIME = 1.5;
+export const OPACITY_ANIMATION_TIME = 0.4;
