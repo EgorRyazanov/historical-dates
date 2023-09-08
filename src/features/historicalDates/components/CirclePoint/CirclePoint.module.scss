@@ -1,0 +1,9 @@
+@use '../../../../../theme/variables' as vars;
+
+.point {
+	width: 6px;
+	height: 6px;
+	background-color: vars.$primary-color;
+	border-radius: 100%;
+	position: absolute;
+}

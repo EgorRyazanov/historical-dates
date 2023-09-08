@@ -1,0 +1,22 @@
+@use '../../../../../theme/variables' as vars;
+
+.dates-container {
+	margin: 0 auto;
+	width: 1440px;
+	height: 100vh;
+	border-left: vars.$border-color 1px solid;
+	border-right: vars.$border-color 1px solid;
+	padding: 170px 40px 104px 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dates-circle {
+	border-radius: 100%;
+	width: 530px;
+	height: 530px;
+	background-color: transparent;
+	border: vars.$border-color 1px solid;
+	position: relative;
+}
