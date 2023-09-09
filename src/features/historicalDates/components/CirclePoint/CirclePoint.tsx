@@ -2,22 +2,19 @@ import { FC, useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import { typedMemo } from '../../../../utils/typedMemo';
-import { Point } from '../../../../utils/models/point';
+import { Point, PointSize } from '../../../../utils/models/point';
 import { changeOpacity } from '../../../../utils/animations/changeOpacityAnimation';
-import { OPACITY_ANIMATION_TIME } from '../../../../utils/consts';
+import { DEFAULT_ANIMATION_TIME, OPACITY_ANIMATION_TIME } from '../../../../utils/consts';
 import styles from './CirclePoint.module.scss';
 
 interface CirclePointComponentProps {
 	title: string;
 	index: number;
 	point: Point;
-	setActiveIndex: (index: number) => void;
 	isActive: boolean;
-	size: {
-		inactive: number;
-		active: number;
-	};
+	size: PointSize;
 	controlClassName?: string;
+	setActiveIndex: (index: number) => void;
 }
 
 const CirclePointComponent: FC<CirclePointComponentProps> = ({
@@ -30,38 +27,66 @@ const CirclePointComponent: FC<CirclePointComponentProps> = ({
 	controlClassName,
 }) => {
 	const [isHover, setIsHover] = useState(false);
+	// Используется useState вместо ref, чтобы предотвратить ошибки с null и отлавливать изменения.
 	const [orderElement, setOrderElement] = useState<HTMLSpanElement | null>(null);
+	const [titleElement, setTitleElement] = useState<HTMLSpanElement | null>(null);
 
 	useEffect(() => {
-		if (orderElement) {
+		if (orderElement != null) {
 			changeOpacity(orderElement, isHover || isActive ? 1 : 0, OPACITY_ANIMATION_TIME);
 		}
 	}, [isActive, isHover, orderElement]);
 
+	useEffect(() => {
+		if (titleElement != null) {
+			changeOpacity(titleElement, isActive ? 1 : 0, OPACITY_ANIMATION_TIME);
+		}
+	}, [titleElement]);
+
+	useEffect(() => {
+		if (titleElement != null) {
+			changeOpacity(
+				titleElement,
+				isActive ? 1 : 0,
+				OPACITY_ANIMATION_TIME,
+				isActive ? DEFAULT_ANIMATION_TIME : undefined
+			);
+		}
+	}, [isActive]);
+
 	return (
 		<div
-			onMouseEnter={() => setIsHover(true)}
-			onMouseLeave={() => setIsHover(false)}
 			style={{
-				bottom: point.y - size.active / 2,
-				left: point.x - size.active / 2,
-				width: size.active,
-				height: size.active,
+				bottom: point.y - size.activeSize / 2,
+				left: point.x - size.activeSize / 2,
 			}}
-			className={clsx(styles['point-container'], controlClassName)}
+			className={clsx(styles.wrapper, controlClassName)}
 		>
-			<button
-				onClick={() => setActiveIndex(index)}
+			<div
+				onMouseEnter={() => setIsHover(true)}
+				onMouseLeave={() => setIsHover(false)}
 				style={{
-					width: isActive || isHover ? size.active : size.inactive,
-					height: isActive || isHover ? size.active : size.inactive,
+					width: size.activeSize,
+					height: size.activeSize,
 				}}
-				className={clsx(styles.point, { [styles['point_active']]: isActive || isHover })}
+				className={styles['point-container']}
 			>
-				<span className={styles['point-text']} ref={setOrderElement}>
-					{index}
-				</span>
-			</button>
+				<button
+					onClick={() => setActiveIndex(index)}
+					style={{
+						width: isActive || isHover ? size.activeSize : size.inactiveSize,
+						height: isActive || isHover ? size.activeSize : size.inactiveSize,
+					}}
+					className={clsx(styles.point, { [styles['point_active']]: isActive || isHover })}
+				>
+					<span className={styles['point-text']} ref={setOrderElement}>
+						{index}
+					</span>
+				</button>
+			</div>
+			<span ref={setTitleElement} className={styles.title}>
+				{title}
+			</span>
 		</div>
 	);
 };

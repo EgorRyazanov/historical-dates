@@ -12,13 +12,3 @@
 	align-items: center;
 	overflow: hidden;
 }
-
-.dates-circle {
-	border-radius: 100%;
-	width: 530px;
-	height: 530px;
-	background-color: transparent;
-	border: vars.$border-color 1px solid;
-	position: relative;
-	box-sizing: border-box;
-}

@@ -14,5 +14,6 @@ export const calculateCirclePointCords = (
 		const y = Math.round(circleDiameter / 2 + (circleDiameter / 2) * Math.sin((angle * Math.PI) / 180));
 		return { x, y };
 	}
+
 	return null;
 };

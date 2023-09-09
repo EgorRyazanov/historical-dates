@@ -1,8 +1,14 @@
 @use '../../../../../theme/variables' as vars;
 
+.wrapper {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
 .point-container {
 	cursor: pointer;
-	position: absolute;
 	background-color: transparent;
 	border-radius: 100%;
 	display: flex;
@@ -30,4 +36,10 @@
 .point-text {
 	opacity: 0;
 	color: vars.$primary-color;
+}
+
+.title {
+	position: absolute;
+	left: calc(100% + 20px);
+	opacity: 0;
 }
