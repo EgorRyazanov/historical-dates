@@ -38,8 +38,9 @@
 	color: vars.$primary-color;
 }
 
-.title {
+.point-title {
 	position: absolute;
 	left: calc(100% + 20px);
 	opacity: 0;
+	font-weight: 700;
 }

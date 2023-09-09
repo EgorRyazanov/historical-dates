@@ -84,7 +84,7 @@ const CirclePointComponent: FC<CirclePointComponentProps> = ({
 					</span>
 				</button>
 			</div>
-			<span ref={setTitleElement} className={styles.title}>
+			<span ref={setTitleElement} className={styles['point-title']}>
 				{title}
 			</span>
 		</div>

@@ -25,25 +25,26 @@ const data: Info[] = [
 ];
 
 interface DatesCircleComponentProps {
+	id: string;
 	pointSize?: PointSize;
 }
 
-const DatesCircleComponent: FC<DatesCircleComponentProps> = ({ pointSize }) => {
+const DatesCircleComponent: FC<DatesCircleComponentProps> = ({ pointSize, id }) => {
 	// Используется useState вместо ref, чтобы предотвратить ошибки с null.
 	const [circleElement, setCircleElement] = useState<HTMLDivElement | null>(null);
 	const [activeIndex, setActiveIndex] = useState<number>(0);
 
-	const generateClassName = (id: number): string => {
-		return `point-${id}`;
+	const generateClassName = (itemId: number): string => {
+		return `point-${itemId}${id}`;
 	};
 
 	useEffect(() => {
 		if (circleElement) {
-			const angle = (360 / data.length) * activeIndex;
+			const rotateAngle = (360 / data.length) * activeIndex;
 			data.map((item) => {
-				rotate(generateClassName(item.id), angle, DEFAULT_ANIMATION_TIME);
+				rotate(generateClassName(item.id), rotateAngle, DEFAULT_ANIMATION_TIME);
 			});
-			rotate(circleElement, -angle, DEFAULT_ANIMATION_TIME);
+			rotate(circleElement, -rotateAngle, DEFAULT_ANIMATION_TIME);
 		}
 	}, [activeIndex]);
 
