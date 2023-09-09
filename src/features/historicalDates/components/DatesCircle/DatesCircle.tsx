@@ -7,61 +7,59 @@ import { calculateCirclePointCords } from '../../../../utils/calculateCirclePoin
 import { CirclePoint } from '../CirclePoint';
 import { PointSize } from '../../../../utils/models/point';
 import styles from './DatesCircle.module.scss';
-
-interface Info {
-	title: string;
-	id: number;
-}
+import { DateCircleItem } from '../../pages/HistoricalDatesPage/HistoricalDatesPage';
 
 const deafultSize: PointSize = { inactiveSize: 6, activeSize: 56 };
 
-const data: Info[] = [
-	{ title: 'dads', id: 1 },
-	{ title: 'dsdsds', id: 2 },
-	{ title: '1231', id: 3 },
-	{ title: 'fsf', id: 4 },
-	{ title: 'rwrw', id: 5 },
-	{ title: 'dasfaf', id: 6 },
-];
-
 interface DatesCircleComponentProps {
 	id: string;
+	info: DateCircleItem[];
+	activeItemId: DateCircleItem['id'];
 	pointSize?: PointSize;
+	setActiveItemId: (id: DateCircleItem['id']) => void;
 }
 
-const DatesCircleComponent: FC<DatesCircleComponentProps> = ({ pointSize, id }) => {
+const DatesCircleComponent: FC<DatesCircleComponentProps> = ({
+	pointSize,
+	id,
+	info,
+	activeItemId,
+	setActiveItemId,
+}) => {
 	// Используется useState вместо ref, чтобы предотвратить ошибки с null.
 	const [circleElement, setCircleElement] = useState<HTMLDivElement | null>(null);
-	const [activeIndex, setActiveIndex] = useState<number>(0);
 
 	const generateClassName = (itemId: number): string => {
 		return `point-${itemId}${id}`;
 	};
 
 	useEffect(() => {
-		if (circleElement) {
-			const rotateAngle = (360 / data.length) * activeIndex;
-			data.map((item) => {
+		const activeItem = info.find((item) => item.id === activeItemId);
+		if (circleElement != null && activeItem != null) {
+			const activeIndex = info.indexOf(activeItem);
+			const rotateAngle = (360 / info.length) * activeIndex;
+			info.map((item) => {
 				rotate(generateClassName(item.id), rotateAngle, DEFAULT_ANIMATION_TIME);
 			});
 			rotate(circleElement, -rotateAngle, DEFAULT_ANIMATION_TIME);
 		}
-	}, [activeIndex]);
+	}, [activeItemId]);
 
 	return (
 		<div ref={setCircleElement} className={styles['dates-circle']}>
-			{data.map((item, index) => {
-				const point = calculateCirclePointCords(index, circleElement, data.length);
+			{info.map((item, index) => {
+				const point = calculateCirclePointCords(index, circleElement, info.length);
 				if (point != null) {
 					return (
 						<CirclePoint
 							key={item.id}
+							id={item.id}
 							index={index}
 							point={point}
 							title={item.title}
 							size={pointSize ?? deafultSize}
-							isActive={activeIndex === index}
-							setActiveIndex={setActiveIndex}
+							isActive={item.id === activeItemId}
+							setActiveItemId={setActiveItemId}
 							controlClassName={generateClassName(item.id)}
 						/>
 					);

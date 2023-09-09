@@ -7,5 +7,6 @@ export const changeOpacity = (element: HTMLElement | string, opacity: number, du
 		opacity,
 		duration,
 		delay,
+		repeat: 0,
 	});
 };

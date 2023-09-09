@@ -6,22 +6,25 @@ import { Point, PointSize } from '../../../../utils/models/point';
 import { changeOpacity } from '../../../../utils/animations/changeOpacityAnimation';
 import { DEFAULT_ANIMATION_TIME, OPACITY_ANIMATION_TIME } from '../../../../utils/consts';
 import styles from './CirclePoint.module.scss';
+import { DateCircleItem } from '../../pages/HistoricalDatesPage/HistoricalDatesPage';
 
 interface CirclePointComponentProps {
 	title: string;
+	id: DateCircleItem['id'];
 	index: number;
 	point: Point;
 	isActive: boolean;
 	size: PointSize;
 	controlClassName?: string;
-	setActiveIndex: (index: number) => void;
+	setActiveItemId: (index: DateCircleItem['id']) => void;
 }
 
 const CirclePointComponent: FC<CirclePointComponentProps> = ({
-	title,
+	id,
 	index,
+	title,
 	point,
-	setActiveIndex,
+	setActiveItemId,
 	isActive,
 	size,
 	controlClassName,
@@ -49,7 +52,7 @@ const CirclePointComponent: FC<CirclePointComponentProps> = ({
 				titleElement,
 				isActive ? 1 : 0,
 				OPACITY_ANIMATION_TIME,
-				isActive ? DEFAULT_ANIMATION_TIME : undefined
+				isActive ? DEFAULT_ANIMATION_TIME : OPACITY_ANIMATION_TIME
 			);
 		}
 	}, [isActive]);
@@ -72,7 +75,7 @@ const CirclePointComponent: FC<CirclePointComponentProps> = ({
 				className={styles['point-container']}
 			>
 				<button
-					onClick={() => setActiveIndex(index)}
+					onClick={() => setActiveItemId(id)}
 					style={{
 						width: isActive || isHover ? size.activeSize : size.inactiveSize,
 						height: isActive || isHover ? size.activeSize : size.inactiveSize,
@@ -80,7 +83,7 @@ const CirclePointComponent: FC<CirclePointComponentProps> = ({
 					className={clsx(styles.point, { [styles['point_active']]: isActive || isHover })}
 				>
 					<span className={styles['point-text']} ref={setOrderElement}>
-						{index}
+						{index + 1}
 					</span>
 				</button>
 			</div>
