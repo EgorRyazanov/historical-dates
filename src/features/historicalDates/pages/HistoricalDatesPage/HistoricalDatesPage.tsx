@@ -20,12 +20,12 @@ export interface DateCircleItem {
 }
 
 const data: Info[] = [
-	{ title: 'dads', id: 1, period: { start: 2003, end: 2099 } },
-	{ title: 'dsdsds', id: 2, period: { start: 2011, end: 2102 } },
-	{ title: '1231', id: 3, period: { start: 2014, end: 2312 } },
-	{ title: 'fsf', id: 4, period: { start: 2002, end: 2001 } },
-	{ title: 'rwrw', id: 5, period: { start: 1999, end: 2002 } },
-	{ title: 'dasfaf', id: 6, period: { start: 2024, end: 2000 } },
+	{ title: 'Космос', id: 1, period: { start: 2003, end: 2099 } },
+	{ title: 'Наука', id: 2, period: { start: 2011, end: 2102 } },
+	{ title: 'Технологии', id: 3, period: { start: 2014, end: 2312 } },
+	{ title: 'Фильмы', id: 4, period: { start: 2002, end: 2001 } },
+	{ title: 'Театр', id: 5, period: { start: 1999, end: 2002 } },
+	{ title: 'Копейск', id: 6, period: { start: 2024, end: 2000 } },
 ];
 
 const HistoricalDatesPageComponent: FC = () => {
@@ -51,7 +51,6 @@ const HistoricalDatesPageComponent: FC = () => {
 			<div className={styles['dates__period']}>
 				<DatesPeriod period={data.find((item) => item.id === activeItemId)!.period} />
 			</div>
-			<button>booom</button>
 			<div className={clsx(styles['dates-markup'], styles['dates-markup_vertical'])} />
 		</div>
 	);

@@ -4,46 +4,39 @@ import clsx from 'clsx';
 import { typedMemo } from '../../../../utils/typedMemo';
 import { Period } from '../../../../utils/models/period';
 import { usePreviousValue } from '../../../../hooks/usePreviousValue';
-import { getUpdatedPeriodPart } from '../../../../utils/getUpdatedPeriod';
+import { DEFAULT_ANIMATION_TIME, DEFAULT_NUMBERS_ANIMATION_SPREAD } from '../../../../utils/consts';
+import { changeNumbersAnimation } from '../../../../utils/animations/changeNumbersAnimation';
 import styles from './DatesPeriod.module.scss';
-import { DEFAULT_ANIMATION_TIME } from '../../../../utils/consts';
 
 interface DatesPeriodComponentProps {
 	period: Period;
 }
 
 const DatesPeriodComponent: FC<DatesPeriodComponentProps> = ({ period }) => {
-	const prevPeriod = usePreviousValue(period);
-	const [currentPeriod, setCurrentPeriod] = useState<Period>(prevPeriod ?? period);
-	const [animationTime, setAnimationTime] = useState(0);
+	const previosPeriod = usePreviousValue(period);
+	const [startDateNode, setStartDateNode] = useState<HTMLSpanElement | null>(null);
+	const [endDateNode, setEndDateNode] = useState<HTMLSpanElement | null>(null);
 
 	useEffect(() => {
-		setAnimationTime(
-			Math.max(
-				Math.abs(period.start - (prevPeriod?.start ?? period.start)),
-				Math.abs(period.end - (prevPeriod?.end ?? period.end))
-			)
-		);
-	}, [period]);
-
-	useEffect(() => {
-		console.log(animationTime);
-		if (currentPeriod.start !== period.start || currentPeriod.end !== period.end)
-			setTimeout(
-				() => {
-					setCurrentPeriod({
-						start: getUpdatedPeriodPart(currentPeriod.start, period.start),
-						end: getUpdatedPeriodPart(currentPeriod.end, period.end),
-					});
-				},
-				(DEFAULT_ANIMATION_TIME * 1000) / animationTime
+		if (startDateNode != null && endDateNode != null) {
+			changeNumbersAnimation(
+				startDateNode,
+				previosPeriod?.start,
+				DEFAULT_NUMBERS_ANIMATION_SPREAD,
+				DEFAULT_ANIMATION_TIME
 			);
-	}, [currentPeriod, period]);
+			changeNumbersAnimation(endDateNode, previosPeriod?.end, DEFAULT_NUMBERS_ANIMATION_SPREAD, DEFAULT_ANIMATION_TIME);
+		}
+	}, [period, startDateNode, endDateNode]);
 
 	return (
 		<>
-			<span className={clsx(styles.date, styles['date_start'])}>{currentPeriod.start}</span>
-			<span className={clsx(styles.date, styles['date_end'])}>{currentPeriod.end}</span>
+			<span ref={setStartDateNode} className={clsx(styles.date, styles['date_start'])}>
+				{period.start}
+			</span>
+			<span ref={setEndDateNode} className={clsx(styles.date, styles['date_end'])}>
+				{period.end}
+			</span>
 		</>
 	);
 };
