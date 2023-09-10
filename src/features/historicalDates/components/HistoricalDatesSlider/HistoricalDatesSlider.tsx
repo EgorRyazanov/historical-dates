@@ -1,12 +1,14 @@
 import { FC, useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.scss';
 
 import { typedMemo } from '../../../../utils/typedMemo';
 import { DefaultArrowButton } from '../../../../components/DefaultArrowButton';
 import { ButtonRotataion } from '../../../../utils/buttonRotation';
-import styles from './HistoricalDatesSlider.module.scss';
 import { Info } from '../../pages/HistoricalDatesPage/HistoricalDatesPage';
 import { DEFAULT_ANIMATION_TIME } from '../../../../utils/consts';
 import { setNumberPrefix } from '../../../../utils/setNumberPrefix';
+import styles from './HistoricalDatesSlider.module.scss';
 
 enum ButtonEventValue {
 	Previos = -1,
@@ -65,6 +67,37 @@ const HistoricalDatesSliderComponent: FC<HistoricalDatesSliderComponentProps> = 
 					rotation={ButtonRotataion.Right}
 				/>
 			</div>
+			<Swiper
+				grabCursor={true}
+				// centeredSlides={true}
+				// slidesPerView={1}
+				// spaceBetween={50}
+				// navigation={{
+				// 	nextEl: '.swiper-button-next',
+				// 	prevEl: '.swiper-button-prev',
+				// }}
+				className="swiper_container"
+			>
+				<SwiperSlide>
+					<div className={styles.slide}>1</div>
+				</SwiperSlide>
+				<SwiperSlide>
+					<div className={styles.slide}></div>
+				</SwiperSlide>
+				<SwiperSlide>
+					<div className={styles.slide}>3</div>
+				</SwiperSlide>
+
+				{/* <div className="slider-controler">
+					<div className="swiper-button-prev slider-arrow">
+						<button>s</button>
+					</div>
+					<div className="swiper-button-next slider-arrow">
+						<button>basdadadasd</button>
+					</div>
+					<div className="swiper-pagination"></div>
+				</div> */}
+			</Swiper>
 		</div>
 	);
 };
