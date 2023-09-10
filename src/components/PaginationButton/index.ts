@@ -1,0 +1,1 @@
+export { PaginationArrowButton } from './PaginationArrowButton';

@@ -20,7 +20,7 @@
 	cursor: pointer;
 	background-color: vars.$primary-color;
 	border-radius: 100%;
-	transition: all ease-in-out 0.4s;
+	transition: all ease-in-out 0.3s;
 	font-size: 20px;
 	line-height: 150%;
 	display: flex;
@@ -29,7 +29,7 @@
 }
 
 .point_active {
-	background-color: vars.$alternative-contrast-primary-color;
+	background-color: vars.$background-color;
 	border: 1px solid vars.$border-color;
 }
 

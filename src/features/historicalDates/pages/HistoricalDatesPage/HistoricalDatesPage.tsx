@@ -6,6 +6,7 @@ import { typedMemo } from '../../../../utils/typedMemo';
 import { DatesCircle } from '../../components/DatesCircle';
 import { DatesPeriod } from '../../components/DatesPeriod/DatesPeriod';
 import { Period } from '../../../../utils/models/period';
+import { HistoricalDatesSlider } from '../../components/HistoricalDatesSlider';
 import styles from './HistoricalDatesPage.module.scss';
 
 export interface Info {
@@ -52,6 +53,7 @@ const HistoricalDatesPageComponent: FC = () => {
 				<DatesPeriod period={data.find((item) => item.id === activeItemId)!.period} />
 			</div>
 			<div className={clsx(styles['dates-markup'], styles['dates-markup_vertical'])} />
+			<HistoricalDatesSlider />
 		</div>
 	);
 };

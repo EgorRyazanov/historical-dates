@@ -9,7 +9,7 @@ import { PointSize } from '../../../../utils/models/point';
 import styles from './DatesCircle.module.scss';
 import { DateCircleItem } from '../../pages/HistoricalDatesPage/HistoricalDatesPage';
 
-const deafultSize: PointSize = { inactiveSize: 6, activeSize: 56 };
+const defaultSize: PointSize = { inactiveSize: 6, activeSize: 56 };
 
 interface DatesCircleComponentProps {
 	id: string;
@@ -57,7 +57,7 @@ const DatesCircleComponent: FC<DatesCircleComponentProps> = ({
 							index={index}
 							point={point}
 							title={item.title}
-							size={pointSize ?? deafultSize}
+							size={pointSize ?? defaultSize}
 							isActive={item.id === activeItemId}
 							setActiveItemId={setActiveItemId}
 							controlClassName={generateClassName(item.id)}
