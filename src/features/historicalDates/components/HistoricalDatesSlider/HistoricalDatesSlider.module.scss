@@ -1,31 +1,12 @@
 @use '../../../../../theme/variables' as vars;
 
-.button {
-	width: 50px;
-	height: 50px;
-	border-radius: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: 1px solid vars.$primary-color;
-	transition: 0.3s background-color ease-in-out;
-	cursor: pointer;
-}
-
-.button_disabled {
-	opacity: 0.5;
-	cursor: not-allowed;
-}
-
-.button:hover {
-	background-color: white;
-}
-
 .buttons-container {
 	display: flex;
 	gap: 20px;
 }
 
-.button_right {
-	transform: rotate(180deg);
+.order {
+	display: inline-block;
+	font-size: 14px;
+	margin-bottom: 20px;
 }

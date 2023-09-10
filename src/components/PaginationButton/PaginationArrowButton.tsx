@@ -9,9 +9,10 @@ import styles from './PaginationArrowButton.module.scss';
 interface PaginationArrowButtonComponentProps {
 	onClick: () => void;
 	rotation: ButtonRotataion;
+	isDisabled: boolean;
 }
 
-const PaginationArrowButtonComponent: FC<PaginationArrowButtonComponentProps> = ({ onClick, rotation }) => {
+const PaginationArrowButtonComponent: FC<PaginationArrowButtonComponentProps> = ({ onClick, rotation, isDisabled }) => {
 	return (
 		<ImageButton
 			containerClassName={clsx(styles.button, {
@@ -21,6 +22,7 @@ const PaginationArrowButtonComponent: FC<PaginationArrowButtonComponentProps> = 
 			imageHeight={12}
 			imageColor="#3877EE"
 			onClick={onClick}
+			isDisabled={isDisabled}
 		/>
 	);
 };

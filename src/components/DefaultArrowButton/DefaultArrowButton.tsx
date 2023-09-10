@@ -22,6 +22,7 @@ const DefaultArrowButtonComponent: FC<DefaultArrowButtonComponentProps> = ({ isD
 			imageWidth={10}
 			imageHeight={14}
 			imageColor="#42567A"
+			isDisabled={isDisabled}
 			onClick={onClick}
 		/>
 	);

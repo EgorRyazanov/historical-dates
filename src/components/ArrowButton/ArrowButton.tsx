@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { typedMemo } from '../../utils/typedMemo';
 
 interface ImageButtonComponentProps {
+	isDisabled: boolean;
 	containerClassName: string;
 	imageWidth: number;
 	imageHeight: number;
@@ -10,6 +11,7 @@ interface ImageButtonComponentProps {
 }
 
 const ImageButtonComponent: FC<ImageButtonComponentProps> = ({
+	isDisabled,
 	containerClassName,
 	imageHeight,
 	imageColor,
@@ -17,7 +19,7 @@ const ImageButtonComponent: FC<ImageButtonComponentProps> = ({
 	onClick,
 }) => {
 	return (
-		<button className={containerClassName} onClick={onClick}>
+		<button className={containerClassName} onClick={onClick} disabled={isDisabled}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width={imageWidth}

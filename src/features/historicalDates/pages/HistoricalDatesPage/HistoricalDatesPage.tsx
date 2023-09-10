@@ -53,7 +53,7 @@ const HistoricalDatesPageComponent: FC = () => {
 				<DatesPeriod period={data.find((item) => item.id === activeItemId)!.period} />
 			</div>
 			<div className={clsx(styles['dates-markup'], styles['dates-markup_vertical'])} />
-			<HistoricalDatesSlider />
+			<HistoricalDatesSlider setActiveItemId={setActiveItemId} activeItemId={activeItemId} info={data} />
 		</div>
 	);
 };
