@@ -1,20 +1,22 @@
 import { FC, useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Не знаю, по какой причине модули swiper не находятся.
+import { Swiper, SwiperSlide } from 'swiper/react'; //eslint-disable-line import/no-unresolved
 import type { Swiper as SwiperType } from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules'; //eslint-disable-line import/no-unresolved
 import { clsx } from 'clsx';
-import 'swiper/css';
+import 'swiper/css'; //eslint-disable-line import/no-unresolved
 
 import { typedMemo } from '../../../../utils/typedMemo';
 import { DefaultArrowButton } from '../../../../components/DefaultArrowButton';
 import { ButtonRotataion } from '../../../../utils/buttonRotation';
-import { EventPeriod, Info } from '../../pages/HistoricalDatesPage/HistoricalDatesPage';
 import { DEFAULT_ANIMATION_TIME } from '../../../../utils/consts';
 import { setNumberPrefix } from '../../../../utils/setNumberPrefix';
 import { HistoricalDateSlide } from '../HistoricalDateSlide/HistoricalDateSlide';
 import { PaginationArrowButton } from '../../../../components/PaginationButton';
 import { ascentAnimation } from '../../../../utils/animations/ascentingAnimation';
 import styles from './HistoricalDatesSlider.module.scss';
+import { EventPeriod, HistoricalDate } from '../../../../utils/models/historicalDate';
 
 enum ButtonEventValue {
 	Previos = -1,
@@ -22,8 +24,8 @@ enum ButtonEventValue {
 }
 
 interface HistoricalDatesSliderComponentProps {
-	info: Info[];
-	setActiveItemId: (id: Info['id']) => void;
+	info: HistoricalDate[];
+	setActiveItemId: (id: HistoricalDate['id']) => void;
 	activeItemId: number;
 }
 
