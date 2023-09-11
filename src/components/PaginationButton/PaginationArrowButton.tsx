@@ -7,15 +7,21 @@ import { ButtonRotataion } from '../../utils/buttonRotation';
 import styles from './PaginationArrowButton.module.scss';
 
 interface PaginationArrowButtonComponentProps {
-	onClick: () => void;
 	rotation: ButtonRotataion;
 	isDisabled: boolean;
+	className?: string;
+	onClick?: () => void;
 }
 
-const PaginationArrowButtonComponent: FC<PaginationArrowButtonComponentProps> = ({ onClick, rotation, isDisabled }) => {
+const PaginationArrowButtonComponent: FC<PaginationArrowButtonComponentProps> = ({
+	onClick,
+	rotation,
+	isDisabled,
+	className,
+}) => {
 	return (
 		<ImageButton
-			containerClassName={clsx(styles.button, {
+			containerClassName={clsx(styles.button, className, {
 				[styles['button_left']]: rotation == ButtonRotataion.Left,
 			})}
 			imageWidth={8}

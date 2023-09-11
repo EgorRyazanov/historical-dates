@@ -7,7 +7,7 @@ interface ImageButtonComponentProps {
 	imageWidth: number;
 	imageHeight: number;
 	imageColor: string;
-	onClick: (args: unknown) => void;
+	onClick?: (args: unknown) => void;
 }
 
 const ImageButtonComponent: FC<ImageButtonComponentProps> = ({

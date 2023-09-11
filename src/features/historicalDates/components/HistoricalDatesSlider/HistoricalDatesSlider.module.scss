@@ -3,6 +3,7 @@
 .buttons-container {
 	display: flex;
 	gap: 20px;
+	margin-bottom: 56px;
 }
 
 .order {
@@ -15,4 +16,32 @@
 	width: 50px;
 	height: 50px;
 	background-color: black;
+}
+
+.slider {
+	left: -60px;
+	padding-left: 60px;
+}
+
+.slider-button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+
+	/** Чтобы кнопка была поверх slider. */
+	z-index: 1;
+}
+
+.slider-button_next {
+	right: 0;
+}
+
+.slider-button_prev {
+	transform: translateY(-50%) rotate(180deg);
+	left: 0;
+	z-index: 100;
+}
+
+.slider-button_disabled {
+	display: none;
 }
