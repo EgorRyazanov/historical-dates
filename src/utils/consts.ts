@@ -1,0 +1,3 @@
+export const DEFAULT_ANIMATION_TIME = 1;
+export const OPACITY_ANIMATION_TIME = 0.3;
+export const DEFAULT_NUMBERS_ANIMATION_SPREAD = 1;

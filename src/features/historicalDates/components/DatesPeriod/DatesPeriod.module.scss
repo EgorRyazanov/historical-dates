@@ -1,0 +1,17 @@
+@use '../../../../../theme/variables' as vars;
+
+.date {
+	font-size: 200px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 160px;
+	letter-spacing: -4px;
+}
+
+.date_start {
+	color: vars.$alternative-primary-color;
+}
+
+.date_end {
+	color: vars.$contrast-primary-color;
+}

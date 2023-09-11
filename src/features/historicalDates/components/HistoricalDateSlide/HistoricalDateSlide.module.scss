@@ -1,0 +1,14 @@
+@use '../../../../../theme/variables' as vars;
+
+.slide-container {
+	width: 320px;
+}
+
+.slide-title {
+	font-family: 'Bebas Neue', sans-serif;
+	margin-bottom: 15px;
+	font-weight: 300;
+	font-size: 25px;
+	line-height: 120%;
+	color: vars.$alternative-primary-color;
+}

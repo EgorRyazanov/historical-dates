@@ -1,0 +1,46 @@
+@use '../../../../../theme/variables' as vars;
+
+.wrapper {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.point-container {
+	cursor: pointer;
+	background-color: transparent;
+	border-radius: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.point {
+	cursor: pointer;
+	background-color: vars.$primary-color;
+	border-radius: 100%;
+	transition: all ease-in-out 0.3s;
+	font-size: 20px;
+	line-height: 150%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.point_active {
+	background-color: vars.$background-color;
+	border: 1px solid vars.$border-color;
+}
+
+.point-text {
+	opacity: 0;
+	color: vars.$primary-color;
+}
+
+.point-title {
+	position: absolute;
+	left: calc(100% + 20px);
+	opacity: 0;
+	font-weight: 700;
+}

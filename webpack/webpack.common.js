@@ -19,12 +19,22 @@ module.exports = {
 				],
 			},
 			{
+				test: /\.css$/i,
+				use: ['style-loader', 'css-loader'],
+			},
+			{
 				test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
 				type: 'asset/resource',
+				exclude: /node_modules/,
 			},
 			{
 				test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-				type: 'asset/resource',
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'file-loader',
+					},
+				],
 			},
 		],
 	},

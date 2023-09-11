@@ -1,0 +1,17 @@
+@use '../../../theme/variables' as vars;
+
+.button {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	background-color: vars.$alternative-contrast-primary-color;
+	filter: drop-shadow(0 0 15px vars.$primary-button-drop-shadow-color);
+}
+
+.button_left {
+	transform: rotate(180deg);
+}
